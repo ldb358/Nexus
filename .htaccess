@@ -1,0 +1,7 @@
+#routing
+Options +FollowSymLinks
+RewriteEngine On
+
+RewriteRule ^index.php/([a-zA-Z0-9_]+)/.*$ index.php?action=$1
+RewriteRule ^index.php/([a-zA-Z0-9_]+)/([a-zA-Z0-9_]+).*$ index.php?action=$1&method=$2
+RewriteRule ^index.php/([a-zA-Z0-9_]+)/([a-zA-Z0-9_]+)/([a-zA-Z0-9_/-]+)$ index.php?action=$1&method=$2&extra=$3

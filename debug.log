@@ -1,0 +1,9 @@
+[25-Apr-2011 03:08:05] PHP Parse error:  parse error, expecting `')'' in C:\wamp\www\nexus\includes\form.class.php on line 27
+[25-Apr-2011 03:08:37] PHP Notice:  Undefined index: type in C:\wamp\www\nexus\includes\form.class.php on line 46
+[25-Apr-2011 03:08:37] PHP Notice:  Undefined index: type in C:\wamp\www\nexus\includes\form.class.php on line 46
+[25-Apr-2011 03:09:09] PHP Notice:  Undefined index: type in C:\wamp\www\nexus\includes\form.class.php on line 46
+[25-Apr-2011 03:09:09] PHP Notice:  Undefined index: type in C:\wamp\www\nexus\includes\form.class.php on line 46
+[27-Apr-2011 19:21:45] PHP Warning:  mysqli::mysqli() [<a href='mysqli.mysqli'>mysqli.mysqli</a>]: [2002] A connection attempt failed because the connected party did not  (trying to connect via tcp://localhost:3306) in C:\wamp\www\nexus\includes\db.mysql.php on line 14
+[27-Apr-2011 19:21:45] PHP Warning:  mysqli::mysqli() [<a href='mysqli.mysqli'>mysqli.mysqli</a>]: (HY000/2002): A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+ in C:\wamp\www\nexus\includes\db.mysql.php on line 14
+[27-Apr-2011 19:21:45] PHP Fatal error:  Maximum execution time of 60 seconds exceeded in C:\wamp\www\nexus\includes\db.mysql.php on line 14

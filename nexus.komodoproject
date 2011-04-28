@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Komodo Project File - DO NOT EDIT -->
+<project id="dc689818-061f-45f4-92e1-27ec706f9e0f" kpf_version="5" name="nexus.komodoproject">
+<preference-set idref="dc689818-061f-45f4-92e1-27ec706f9e0f">
+  <boolean id="import_live">1</boolean>
+</preference-set>
+</project>
