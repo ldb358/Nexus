@@ -48,6 +48,9 @@ class reroute{
         return $url;
     }
     public function get_route($module, $method, $extra = ''){
+        /*
+         *  This is what is responcable for building the route/url to any particular module method
+         */
         $url = $this->get_url();
         if(!empty($module)){
             $url .= "/$module/";

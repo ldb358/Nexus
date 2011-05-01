@@ -33,7 +33,7 @@ class page_new_form extends form{
         $dbprefix = DBPREFIX;
         @$title = $form['title'];
         @$contents = $form['contents'];
-        if(!empty($title) && !empty($content)){
+        if(!empty($title) && !empty($contents)){
             include_once '/modules/user/user.class.php';
             $user = new user();
             $userid = $user->get_user_info('id');

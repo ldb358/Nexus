@@ -1,6 +1,5 @@
 <?php $this->get('header'); ?>
 <div class='maincontents'>
-    <?php //var_dump($this->get_widgets()); ?>
     <?php foreach($this->get_widgets() as $widget): ?>
     <div class='col'>
         <div class='content contentcollapse'>

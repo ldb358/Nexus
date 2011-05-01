@@ -23,7 +23,13 @@ class nexus_core{
             $this->view->control = $this;
         }
     }
-    
+    public function load_module($name){
+        //this will any core module with out a view
+        include_once "modules/$name/$name.class.php";
+        if(class_exists($name)){
+            return new $name(true);
+        }
+    }
     public function __call($name, $args){
         $this->method = $name;
         if(method_exists($this, 'action'.ucfirst($name))){
@@ -92,6 +98,9 @@ class nexus_core{
         return $this->default_view;
     }
     public function get_site_option($name){
+        /* This will return a site option from the database (useful for themes and modules)
+         * given the name key
+        */
         $dbprefix = DBPREFIX;
         if($this->db instanceof db){
             $this->db->prepare("SELECT value FROM {$dbprefix}options WHERE name=? LIMIT 1");

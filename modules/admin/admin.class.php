@@ -28,7 +28,8 @@ class admin extends nexus_core{
             }
             $this->actionDefault($args);
         }else{
-            call_user_func(array($this,'action'.ucfirst($id)),$args);
+            $method = 'action'.ucfirst($id);
+            $this->$method($id,$args);
         }
     }
     public function load_all_widgets(){
@@ -54,11 +55,13 @@ class admin extends nexus_core{
         
     }
     public function actionProcess($id, $args){
-        @include_once "admin_{$args[0]}.php";
-        $class = "admin_$id";
+        @include_once "admin.{$args[0]}.php";
+        $class = "admin_{$args[0]}";
         if(class_exists($class)){
             $master_widget = new $class(__dir__.'/widgets/');
-            $this->view->set_widgets($master_widget->get($args[0]));
+            $master_widget->process($args);
+            $id = array($id);
+            $this->view->set_widgets($master_widget->get(array_merge($id, $args[1])));
         }
         $this->actionDefault($args);
     }

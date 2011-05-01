@@ -42,11 +42,13 @@ class master_widget{
         $this->widgets = array_merge($this->widgets, $widgets);
     }
     public function get_widget($type, $name){
+        $file = "{$this->from}{$type}_{$name}.widget.php";
         include_once $file;
+        $start = strlen($this->from);
         $end = strpos($file, '.', $start);
         $widget = substr($file, strlen($this->from) ,$end-$start);
         if(class_exists($widget)){
-            return new $widget($this->db, $from);
+            return new $widget($this->db, $this->from);
         }
     }
     public function add_widget($widget){

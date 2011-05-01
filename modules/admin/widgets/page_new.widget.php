@@ -28,7 +28,18 @@ class page_new extends widget{
             $this->body = $form->get_form();
         }
     }
-    public function process(){
-        echo 'ran';
+    public function process($method, $values){
+        include_once "/modules/page/$method.form.php";
+        $class = "page_{$method}_form";
+        if(class_exists($class)){
+            $form = new $class();
+            $return = $form->process($values, $this->db);
+            if(!empty($return)){
+                $this->body = "<p>$return</p>";
+                $this->body .= $form->get_form();
+            }else{
+                $this->body = "page created";
+            }
+        }
     }
 }
