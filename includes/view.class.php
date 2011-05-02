@@ -8,8 +8,8 @@ if(!defined('__nexus')){
  *  and to include_once the files into the view
  */
 class view{
-    protected $default, $dir, $path, $modules = array(), $widgets = array();
-    public function __construct($dir, $default = null){
+    protected $default, $dir, $path, $modules = array(), $widgets = array(), $control;
+    public function __construct($dir, $default){
         /*  This is the file to be loaded when the load method is called with out
         **  a parameter 
         */

@@ -10,7 +10,6 @@ class user extends nexus_core{
         try{ parent::__construct($isview); }catch(Exception $e){
             $redirect = new reroute();
             $redirect->route('error', 'database');
-            exit();
         }
     }
     public function actionDefault(){
@@ -18,10 +17,13 @@ class user extends nexus_core{
         $redirect->route();
     }
     public function actionLogin(){
+        $this->view->form = $this->get_login_form()->get_form();
+        $this->view->load();
+    }
+    public function get_login_form(){
         include_once 'login.form.php';
         $form = new user_login_form();
-        $this->view->form = $form->get_form();
-        $this->view->load();
+        return $form;
     }
     public function actionLogout(){
         session_destroy();
@@ -30,10 +32,13 @@ class user extends nexus_core{
         $redirect->route();
     }
     public function actionRegister(){
+        $this->view->form = $this->get_register_form()->get_form();
+        $this->view->load();
+    }
+    public function get_register_form(){
         include_once 'register.form.php';
         $form  = new user_register_form();
-        $this->view->form = $form->get_form();
-        $this->view->load();
+        return $form;
     }
     public function process($method, $values){
         include_once "$method.form.php";
@@ -100,7 +105,7 @@ class user extends nexus_core{
         if(!isset($this->user[$name])){
             $this->set_user();
         }
-        if(isset($this->user[$name])){
+        if(empty($this->user[$name]) && $this->user[$name] !== 0){
             return false;
         }
         return $this->user[$name];

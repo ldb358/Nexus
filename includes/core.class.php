@@ -5,7 +5,7 @@ if(!defined('__nexus')){
     $redirect->route('error', '404');
 }
 class nexus_core{
-    public $view, $current_view_dir, $default_view, $method, $load_modules = array();
+    public $view, $current_view_dir, $default_view, $method, $load_modules = array(), $isview;
     
     public function __construct($isview = false){
         include_once 'view.class.php';
@@ -14,13 +14,12 @@ class nexus_core{
         if(!$this->db instanceof db){
             throw new Exception('No Database');
         }
-        if(!$isview){
-            $this->current_view_dir = $this->get_current_view_dir();
-            $this->default_view = $this->get_default_view();
-            $this->view = new view($this->current_view_dir,$this->default_view);
-            $this->view->reroute = new reroute();
-            $this->view->site_name = $this->get_site_option('title');
-            $this->view->control = $this;
+        $this->isview = $isview;
+        if(!$isview){            
+           $this->view = new view($this->get_current_view_dir(), $this->get_default_view());
+           $this->view->control = $this;
+           $this->view->reroute = new reroute();
+           $this->view->site_name = $this->get_site_option('title');
         }
     }
     public function load_module($name){
@@ -31,6 +30,10 @@ class nexus_core{
         }
     }
     public function __call($name, $args){
+        if(empty($this->method) && !$this->isview){
+            $this->default_view = '';
+            $this->get_default_view();
+        }
         $this->method = $name;
         if(method_exists($this, 'action'.ucfirst($name))){
             call_user_func(array($this,'action'.ucfirst($name)),$args);
@@ -51,7 +54,6 @@ class nexus_core{
         ** @return string the current view dir it will also set the value in the class for future access
         */
         if(empty($this->current_view_dir)){
-            
             if($this->db instanceof db){
                 $result = $this->get_site_option('theme');
                 if(!is_null($result)){
@@ -74,13 +76,13 @@ class nexus_core{
         $controller = get_class($this);
         if(empty($this->default_view)){
             ob_start();
-            @include_once $this->get_current_view_dir()."$controller.{$this->method}.php";
+            @include $this->get_current_view_dir()."$controller.{$this->method}.php";
             $ob = ob_get_contents();
             if(empty($ob)){
-                @include_once $this->get_current_view_dir()."$controller.php";
+                @include $this->get_current_view_dir()."$controller.php";
                 $ob = ob_get_contents();
                 if(empty($ob)){
-                    @include_once $this->get_current_view_dir()."{$this->method}.php";
+                    @include $this->get_current_view_dir()."{$this->method}.php";
                     $ob = ob_get_contents();
                     if(empty($ob)){
                         $this->default_view = 'index.php';

@@ -1,0 +1,2 @@
+[02-May-2011 05:00:27] PHP Parse error:  parse error in C:\wamp\www\nexus\includes\permissions.function.php on line 14
+[02-May-2011 05:01:48] PHP Warning:  var_dump() expects at least 1 parameter, 0 given in C:\wamp\www\nexus\includes\permissions.function.php on line 14

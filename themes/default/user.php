@@ -1,10 +1,3 @@
-<?php
-if(!defined('__nexus')){
-    header("HTTP/1.0 404 not found");
-    $redirect = new reroute();
-    $redirect->route('error', '404');
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

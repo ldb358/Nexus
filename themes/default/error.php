@@ -11,6 +11,11 @@ if(!defined('__nexus')){
     <title><?php echo $this->title; ?></title>
 </head>
 <body>
-    <?php echo $this->error; ?>
+    <?php
+        echo $this->error;
+        if(isset($this->form)){
+            echo $this->form;
+        }
+    ?>
 </body>
 </html>
