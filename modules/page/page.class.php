@@ -64,6 +64,5 @@ class page extends nexus_core{
         }
         $this->view->load();
     }
-    
 }
 ?>

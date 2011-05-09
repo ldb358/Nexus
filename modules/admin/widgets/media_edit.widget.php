@@ -4,7 +4,7 @@ if(!defined('__nexus')){
     $redirect = new reroute();
     $redirect->route('error', '404');
 }
-class page_edit extends widget{
+class media_edit extends widget{
     protected $control, $params;
     public function __construct(db $db, $params){
         try{
@@ -15,7 +15,7 @@ class page_edit extends widget{
         }
     }
     public function set_header(){
-        $this->header = 'Edit Pages';
+        $this->header = 'Edit Media';
     }
     public function set_body(){
         $body = '';
@@ -37,25 +37,37 @@ class page_edit extends widget{
         }
         $feed = new feed(true);
         $dbprefix = DBPREFIX;
-        $pages = $feed->get_feed('page')->level($user_level)->order_by("{$dbprefix}content.published")->execute();
+        $media_items = $feed->get_feed('media')->level($user_level)->order_by("{$dbprefix}content.published")->execute();
         //get form
-        @include_once '/modules/page/page.class.php';
-        if(!class_exists('page')){
+        @include_once '/modules/media/media.class.php';
+        if(!class_exists('media')){
             return 'An error has occured';
         }
-        $page_class = new page(true);
-        $form = $page_class->get_new_form_object();
+        $media_class = new media(true);
+        $form = $media_class->get_upload_form_object();
         $form->set_action('admin');
-        $form->set_method('page');
+        $form->set_method('media');
         $form->set_widget('edit');
         $form_fields = $form->get_fields();
-        $form_fields[count($form_fields)] = array(
-            'name' => 'id',
-            'type' => 'hidden',
-            'default' => ''
+        $form_fields = array(
+            array(
+                'name' => 'id',
+                'type' => 'hidden',
+                'default' => ''
+            ),
+            array(
+                'name' => 'title',
+                'type' => 'text',
+                'default' => ''
+            ),
+            array(
+                'name' => 'submit',
+                'type' => 'submit',
+                'default' => 'Edit Title'
+            )
         );
         ob_start();
-        include 'themes/page_edit.php';
+        include 'themes/media_edit.php';
         $contents = ob_get_clean();
         $this->body = $contents;
     }

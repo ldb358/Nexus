@@ -28,4 +28,18 @@ class widget{
     public function set_body(){
         return;
     }
+    public function process($module, $method, $values){
+        include_once "/modules/$module/$method.form.php";
+        $class = "{$module}_{$method}_form";
+        if(class_exists($class)){
+            $form = new $class();
+            $return = $form->process($values, $this->db);
+            if(!empty($return)){
+                $this->set_body();
+                $this->body = "<p>$return</p>".$this->body;
+            }else{
+                $this->body = "page created";
+            }
+        }
+    }
 }

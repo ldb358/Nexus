@@ -1,2 +1,8 @@
-[02-May-2011 05:00:27] PHP Parse error:  parse error in C:\wamp\www\nexus\includes\permissions.function.php on line 14
-[02-May-2011 05:01:48] PHP Warning:  var_dump() expects at least 1 parameter, 0 given in C:\wamp\www\nexus\includes\permissions.function.php on line 14
+[09-May-2011 05:09:26] PHP Notice:  Undefined property: media_item::$db in C:\wamp\www\nexus\modules\media\media_item.class.php on line 33
+[09-May-2011 05:09:26] PHP Fatal error:  Call to a member function prepare() on a non-object in C:\wamp\www\nexus\modules\media\media_item.class.php on line 33
+[09-May-2011 05:11:02] PHP Fatal error:  Cannot redeclare media_item::set_values() in C:\wamp\www\nexus\modules\media\media_item.class.php on line 79
+[09-May-2011 05:11:21] PHP Notice:  Undefined property: media_item::$db in C:\wamp\www\nexus\modules\media\media_item.class.php on line 32
+[09-May-2011 05:11:21] PHP Fatal error:  Call to a member function prepare() on a non-object in C:\wamp\www\nexus\modules\media\media_item.class.php on line 32
+[09-May-2011 05:12:42] PHP Notice:  Undefined property: media_item::$db in C:\wamp\www\nexus\modules\media\media_item.class.php on line 33
+[09-May-2011 05:12:42] PHP Fatal error:  Call to a member function prepare() on a non-object in C:\wamp\www\nexus\modules\media\media_item.class.php on line 33
+[09-May-2011 05:29:26] PHP Fatal error:  Call to a member function bind_param() on a non-object in C:\wamp\www\nexus\modules\media\edit.form.php on line 39

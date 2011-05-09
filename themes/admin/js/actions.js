@@ -55,5 +55,14 @@ $(document).ready(function(){
     $('input[type="submit"]').unbind('click').click(function(){
         $(this).parent().parent().submit();
     });
-    
+    /* create the hide unhide edit form */
+    $('.editpage-button a').bind('click', function(){
+        var editpage = $(this).parent().parent().find('.editpage-form');
+        if(editpage.hasClass('hide')){
+            editpage.removeClass('hide', 1000).fadeIn(1000);
+        }else{
+            editpage.addClass('hide', 0)
+        }
+        return false;
+    });
 });

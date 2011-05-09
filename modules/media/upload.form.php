@@ -90,23 +90,5 @@ class media_upload_form extends form{
             return $this->error($form, "file size is to big");
         }
     }
-    public function get_form(){
-        $output = '<form action="" method="post" enctype="multipart/form-data">';
-        foreach($this->fields as $key => $input){
-            @$name = "{$this->method}[{$input['name']}]";
-            if(@$input['type'] != 'hidden' && $input['type'] != 'submit' && $input['type'] != 'file'){
-                @$fields = sprintf('<p class="input"><label for="%1$s">%2$s</label><input type="%3$s" name="%1$s" value="%4$s" /></p>',$name, $input['label'], $input['type'], $input['default']);
-            }else if($input['type'] == 'submit'){
-                @$fields = sprintf('<p class="input submit"><input type="%1$s" value="%2$s" /></p>', $input['type'], $input['default']);
-            }else if($input['type'] != 'file'){
-                @$fields = sprintf('<input type="%2$s" name="%1$s" value="%3$s" />',$name, $input['type'], $input['default']);
-            }else{
-                @$fields = sprintf('<input type="%2$s" name="%1$s" value="%3$s" />',$input['name'], $input['type'], $input['default']);
-            }
-            $output .= $fields;
-        }
-        $output .= "<input type='hidden' name='action' value='{$this->action}' /><input type='hidden' name='method' value='{$this->method}' /></form>";
-        return $output;
-    }
 }
 ?>

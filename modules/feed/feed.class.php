@@ -11,7 +11,8 @@ class feed extends nexus_core{
         'taxonomies' => array(),
         'fields' => array(),
         'types' => array(),
-        'joins' => array()
+        'joins' => array(),
+        'orderby' => array()
     );
     public function __construct(){
         try{ parent::__construct(); }catch(Exception $e){
@@ -131,6 +132,23 @@ class feed extends nexus_core{
         }
         $sql .= $fields;
         return $sql;
+    }
+    public function order_by(){
+        /*  Pass the field names of the fields that should be used to sort the data
+         *
+        */
+        $params = func_get_args();
+        $num = func_num_args();
+        if($num > 0){
+            $orderby = "ORDER BY ". array_shift($params);
+            foreach($params as $param){
+                $orderby .= ", $param";
+            }
+            $this->query['orderby'] = $orderby;
+            return $this;
+        }else{
+            return $this;
+        }
     }
 }
 ?>

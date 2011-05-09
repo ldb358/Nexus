@@ -5,7 +5,7 @@ if(!defined('__nexus')){
     $redirect->route('error', '404');
 }
 include_once '/includes/form.class.php';
-class page_new_form extends form{
+class page_edit_form extends form{
     public function __construct(){
         $action = 'page';
         $method = 'new';
@@ -33,29 +33,22 @@ class page_new_form extends form{
         $dbprefix = DBPREFIX;
         @$title = $form['title'];
         @$contents = $form['contents'];
-        if(!empty($title) && !empty($contents)){
+        @$id = $form['id'];
+        if(!empty($title) && !empty($contents) && (!empty($id) && $id !== 0)){
             //query and get the new content_id
-            include_once '/modules/user/user.class.php';
-            $user = new user();
-            $userid = $user->get_user_info('id');
-            //query and get type_id
-            $db->prepare("SELECT type FROM {$dbprefix}content_type WHERE `desc`='page'");
-            $db->sql->bind_result($type);
-            $db->query();
-            //query and get the new content_id
-            $db->prepare("SELECT content_id FROM {$dbprefix}content ORDER BY content_id DESC LIMIT 1");
+            $db->prepare("SELECT content_id FROM {$dbprefix}content WHERE {$dbprefix}content.content_id=?");
+            $db->sql->bind_param('i', $id);
             $db->sql->bind_result($id);
             $db->query();
-            $id++;
-            //insert into the content feed
-            $db->prepare("INSERT INTO {$dbprefix}content( content_id, type, user_id, published, permissions) VALUES(?,?,?,?,10)");
-            $db->sql->bind_param('iiis', $id, $type, $userid, date('Y-m-d G:i:s'));
-            $db->query();
-            //insert into page
-            $db->prepare("INSERT INTO {$dbprefix}page(id, title, contents) VALUES(?, ?, ?)");
-            $db->sql->bind_param('iss', $id, $title, $contents);
-            $db->query();
-            return $this->error(array('title'=>'', 'contents'=> ''), "Page Added");
+            if(!empty($id)){
+                //update feed
+                $db->prepare("UPDATE {$dbprefix}page SET {$dbprefix}page.title=?, {$dbprefix}page.contents=? WHERE {$dbprefix}page.id=?");
+                $db->sql->bind_param('ssi', $title, $contents, $id);
+                $db->query();
+                return $this->error(array('title'=>'', 'contents'=> ''), "Page Updated");
+            }else{
+                return $this->error(array('title' => $title, 'contents' => $contents), 'Invalid Form');
+            }
         }else{
             return $this->error(array('title'=> $title, 'contents'=> $contents), "All Fields Are Required");
         }

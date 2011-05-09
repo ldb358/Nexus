@@ -76,4 +76,7 @@ class media_item extends nexus_core{
     public function get_permissions(){
         return $this->permissions;
     }
+    public function get_author(){
+        return $this->author;
+    }
 }

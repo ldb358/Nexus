@@ -4,7 +4,7 @@ if(!defined('__nexus')){
     $redirect = new reroute();
     $redirect->route('error', '404');
 }
-class page_new extends widget{
+class media_upload extends widget{
     protected $control, $params;
     public function __construct(db $db, $params){
         try{
@@ -15,16 +15,16 @@ class page_new extends widget{
         }
     }
     public function set_header(){
-        $this->header = 'New Page';
+        $this->header = 'Upload Image';
     }
     public function set_body(){
-        include_once '/modules/page/page.class.php';
-        if(class_exists('page')){
-            $page = new page(true);
-            $form = $page->get_new_form_object();
+        include_once '/modules/media/media.class.php';
+        if(class_exists('media')){
+            $page = new media(true);
+            $form = $page->get_upload_form_object();
             $form->set_action('admin');
-            $form->set_method('page');
-            $form->set_widget('new');
+            $form->set_method('media');
+            $form->set_widget('upload');
             $this->body = $form->get_form();
         }
     }

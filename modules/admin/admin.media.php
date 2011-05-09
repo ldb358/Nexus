@@ -4,7 +4,7 @@ if(!defined('__nexus')){
     $redirect = new reroute();
     $redirect->route('error', '404');
 }
-class admin_page extends master_widget{
+class admin_media extends master_widget{
     protected $control, $params;
     public function __construct($from){
         try{
@@ -15,7 +15,7 @@ class admin_page extends master_widget{
         }
     }
     public function load_widgets($args){
-        $args[0] = 'page';
+        $args[0] = 'media';
         parent::load_widgets($args);
     }
 }

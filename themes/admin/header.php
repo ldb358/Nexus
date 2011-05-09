@@ -44,7 +44,7 @@
             <img class="spacer" src="<?php echo $this->lpath ?>images/div.png" alt="div" />
             <a href="<?php echo $this->reroute->get_route('admin', 'appearance'); ?>"><img src="<?php echo $this->lpath ?>images/6.png" alt="appearance" /></a>
             <img class="spacer" src="<?php echo $this->lpath ?>images/div.png" alt="div" />
-            <a href="<?php echo $this->reroute->get_route('admin', 'pages'); ?>"><img src="<?php echo $this->lpath ?>images/7.png" alt="pages" /></a>
+            <a href="<?php echo $this->reroute->get_route('admin', 'page'); ?>"><img src="<?php echo $this->lpath ?>images/7.png" alt="pages" /></a>
             <img class="spacer" src="<?php echo $this->lpath ?>images/div.png" alt="div" />
             <a href="<?php echo $this->reroute->get_route('admin', 'feedback'); ?>"><img src="<?php echo $this->lpath ?>images/8.png" alt="feedback" /></a>
             <img class="spacer" src="<?php echo $this->lpath ?>images/div.png" alt="div" />

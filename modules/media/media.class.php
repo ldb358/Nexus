@@ -18,18 +18,26 @@ class media extends nexus_core{
         $redirect->route();
     }
     public function get_image_uploader(){
+        $upload = $this->get_upload_form_object();
+        return $upload->get_form();
+    }
+    public function get_upload_form_object(){
         include_once 'upload.form.php';
         $upload = new media_upload_form();
-        return $upload->get_form();
+        return $upload;
     }
     public function actionUpload(){
         $this->view->form = $this->get_image_uploader();
         $this->view->load();
     }
     public function get_embed_form(){
+        $upload = $this->get_embed_form_object();
+        return $upload->get_form();
+    }
+    public function get_embed_form_object(){
         include_once 'embed.form.php';
         $upload = new media_embed_form();
-        return $upload->get_form();
+        return $upload;
     }
     public function actionEmbed(){
         $this->view->form = $this->get_embed_form();

@@ -76,5 +76,11 @@ class form {
     public function set_widget($widget){
         $this->widget = $widget;
     }
+    public function get_fields(){
+        return $this->fields;
+    }
+    public function set_fields($fields){
+        $this->fields = $fields;
+    }
 }
 ?>

@@ -72,4 +72,15 @@ class master_widget{
     public function add_form(widget $form){
         $this->forms[count($this->forms)] = $form;
     }
+    public function process($values){
+        /* this function will process all form data for page widgets */
+        //seperate the array into $module = 'module name' exp. page and $values = form data
+        $module = $values[0];
+        $values = $values[1];
+        $widget_name = $values['widget'];
+        unset($values['widget']);
+        $widget = $this->get_widget($module, $widget_name);
+        $widget->process($module, $widget_name, $values);
+        $this->add_form($widget);
+    }
 }

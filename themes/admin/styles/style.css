@@ -173,7 +173,7 @@ a img{ border:none; }
     -webkit-box-shadow: 0 0 10px 3px #111;
     box-shadow: 0 0 10px 3px #111;
     padding-bottom:28px;
-    margin-top:10px;
+    margin-top:40px;
     overflow:hidden;
     cursor:pointer;
     
@@ -214,7 +214,7 @@ a img{ border:none; }
     float:left;
     border-bottom:1px solid #0b0b0b;
 }
-.contents div, .contents span, .contents applet, .contents object, .contents iframe, .contents
+.contents span, .contents applet, .contents object, .contents iframe, .contents
 h1, .contents h2, .contents h3, .contents h4, .contents h5, .contents h6, .contents p, .contents blockquote, .contents pre, .contents
 a, .contents abbr, .contents acronym, .contents address, .contents big, .contents cite, .contents code, .contents
 del, .contents dfn, .contents em, .contents font, .contents img, .contents ins, .contents kbd, .contents q, .contents s, .contents samp, .contents
@@ -372,4 +372,52 @@ color:#d1d1d1;
 }
 .submit input:hover{
     cursor:pointer;
+}
+.editpage{
+    float:left;
+    display:block;
+    height:auto;
+    width:100%;
+}
+.editpage-id{
+    float:left;
+    width:5%;
+    display:block;
+}
+.editpage-title{
+    float:left;
+    width:20%;
+    display:block;
+}
+.editpage-author{
+    float:left;
+    width:20%;
+    display:block;
+}
+.editpage-date{
+    float:left;
+    width:20%;
+    display:block;
+}
+.editpage-button{
+    width:20%;
+    display:block;
+    float:left;
+}
+.editpage-button a{
+    float:left;
+    padding:0px;
+    margin:0px;
+    text-transform:capitalize;
+}
+.editpage-form{
+    float:left;
+    clear:both;
+    width:100%;
+    display:block;
+    margin-bottom:30px;
+}
+.hide{
+    display:none;
+    height:0%;
 }
