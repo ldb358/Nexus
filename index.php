@@ -23,13 +23,14 @@ if(isset($_POST['action'])){
         $redirect->route($_GET['method'], $_GET['action']);
     }
 }else if(!empty($_GET['action'])){
-/* else load the appopreate module via get*/
+    /* else load the appopreate module via get*/
     if($_GET['action'] == 'error'){
         if(file_exists('modules/error/error.class.php')){
             include_once 'modules/error/error.class.php';
             $method = !empty($_GET['method'])? $_GET['method'] : 'default';
             $page = new error(DISPLAY_ERRORS);
             $page->$method();
+            exit();
         }else{
             $redirect = new reroute();
             $redirect->route();
@@ -48,7 +49,7 @@ if(isset($_POST['action'])){
         }
     }
 }else{
-/* else load the home page */
+    /* else load the home page */
     if(file_exists('modules/page/page.class.php')){
         include_once 'modules/page/page.class.php';
         $page = new page();

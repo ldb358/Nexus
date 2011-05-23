@@ -22,6 +22,7 @@ foreach($media_items->get_feed_objects() as $page):
     <div class='editpage-author'><?php echo $page->get_author(); ?></div>
     <div class='editpage-date'><?php echo $page->get_published('d/m/Y'); ?></div>
     <div class='editpage-button'><a href='#'>edit</a></div>
+    <div class='deletemedia-button' id='<?php echo $page->get_id(); ?>'><a href='#'>Delete</a></div>
     <div class='editpage-form hide'><?php echo $form->get_form(); ?></div>
 </div>
 <?php

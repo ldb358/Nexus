@@ -131,6 +131,10 @@ class feed extends nexus_core{
             }
         }
         $sql .= $fields;
+        /* add order by */
+        if(isset($this->query['orderby'])){
+            $sql .= " {$this->query['orderby']}";
+        }
         return $sql;
     }
     public function order_by(){

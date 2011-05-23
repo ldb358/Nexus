@@ -51,18 +51,41 @@ $(document).ready(function(){
         });
     });
     //$('.content').children().bind('click', function(){ return false });
-    $('.contents').find(':not(input[type="submit"])').bind('click', function(){ return false });
-    $('input[type="submit"]').unbind('click').click(function(){
-        $(this).parent().parent().submit();
+    $('.contents').bind('click', function(){ return false });
+    $('input[type="submit"], input[type="file"]').unbind('click').click(function(e){
+         e.stopPropagation();
     });
     /* create the hide unhide edit form */
     $('.editpage-button a').bind('click', function(){
         var editpage = $(this).parent().parent().find('.editpage-form');
+        editpage.removeAttr("style")
         if(editpage.hasClass('hide')){
-            editpage.removeClass('hide', 1000).fadeIn(1000);
+            editpage.removeClass('hide', 1000);
         }else{
-            editpage.addClass('hide', 0)
+            editpage.addClass('hide', 0);
         }
         return false;
+    });
+    $('.deletepage-button a').bind('click',function(){
+        var delete_confirm = new confirm_action({
+            method: 'delete',
+            action: 'page',
+            message: 'are you sure that you would like to delete this page?',
+            submit_label: 'Delete',
+            cancel_label: 'Cancel',
+            id : $(this).parent().attr('id')
+        });
+        delete_confirm.add('.col');
+    });
+    $('.deletemedia-button a').bind('click',function(){
+        var delete_confirm = new confirm_action({
+            method: 'delete',
+            action: 'media',
+            message: 'are you sure that you would like to delete this item?',
+            submit_label: 'Delete',
+            cancel_label: 'Cancel',
+            id : $(this).parent().attr('id')
+        });
+        delete_confirm.add('.col');
     });
 });

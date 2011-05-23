@@ -37,7 +37,7 @@ class reroute{
         /* This function builds the current base url for the redirect */
         $url = 'http://'.$_SERVER['SERVER_NAME'] //build the base url exp. http://www.example.com
                 .(strpos($_SERVER['REQUEST_URI'],'.php')===false? // check id the request url has a file in it
-                    basename($_SERVER['REQUEST_URI']) // if there is no file get the request url with out the ending /
+                    '/'.basename($_SERVER['REQUEST_URI']) // if there is no file get the request url with out the ending /
                 :
                     substr($_SERVER['REQUEST_URI'],0, // there is a file get everthing before index.php
                             strrpos($_SERVER['REQUEST_URI'],'/', // get the last / before the .php extension

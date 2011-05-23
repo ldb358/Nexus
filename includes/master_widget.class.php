@@ -42,14 +42,22 @@ class master_widget{
         $this->widgets = array_merge($this->widgets, $widgets);
     }
     public function get_widget($type, $name){
+        /* check if the widget is an auto load widget if it is return a copy of it */
         $file = "{$this->from}{$type}_{$name}.widget.php";
-        include_once $file;
-        $start = strlen($this->from);
-        $end = strpos($file, '.', $start);
-        $widget = substr($file, strlen($this->from) ,$end-$start);
+        @include_once $file;
+        $widget = "{$type}_{$name}";
         if(class_exists($widget)){
             return new $widget($this->db, $this->from);
+        }else{
+            /* check if a widget is a call load widget if it is return a copy */
+            $file = "{$this->from}{$type}".ucfirst($name).".widget.php";
+            include_once $file;
+            $widget = "{$type}_{$name}";
+            if(class_exists($widget)){
+                return new $widget($this->db, $this->from);
+            }
         }
+        
     }
     public function add_widget($widget){
         /* adds a widget to the widgets array can either pass a widget or an array with the name and type vars*/

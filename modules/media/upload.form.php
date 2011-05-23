@@ -6,6 +6,7 @@ if(!defined('__nexus')){
 }
 include_once '/includes/form.class.php';
 class media_upload_form extends form{
+    public $id, $path;
     public function __construct(){
         $action = 'media';
         $method = 'upload';
@@ -36,15 +37,16 @@ class media_upload_form extends form{
         $db->sql->bind_param('s', $name);
         $db->sql->bind_result($maxsize);
         $db->query();
-        $upload = $form['image'];
+        $upload = $form['media'];
+        $tmp_name = $upload['tmp_name']['image'];
         //see if the image is under the maximum file size in megabytes
-        if(filesize($upload['tmp_name'])/1048576 < (int)$maxsize){
-            list($width, $height, $type2) = getimagesize($upload['tmp_name']);
-            $type =  image_type_to_mime_type($type2);
+        if(filesize($tmp_name)/1048576 < (int)$maxsize){
+            list($width, $height, $type2) = getimagesize($tmp_name);
+            $type = image_type_to_mime_type($type2);
             if((($type == "image/jpeg") || ($type == "image/pjpeg") || ($type == "image/gif") || ($type == "image/png"))){
-                if($upload['error'] == 0){  
+                if($upload['error']['image'] == 0){  
                     $username = $_SESSION['username'];
-                    $ext = substr($upload['name'],strrpos($upload['name'],"."));
+                    $ext = substr($upload['name']['image'],strrpos($upload['name']['image'],"."));
                     $new_src = $_SERVER['DOCUMENT_ROOT'].substr($_SERVER['REQUEST_URI'],1,strpos($_SERVER['REQUEST_URI'],'/index.php',1));
                     $relative  = "media/".date('Y/m/d/');
                     $new_src .= $relative;
@@ -69,13 +71,15 @@ class media_upload_form extends form{
                         $db->sql->bind_result($id);
                         $db->query();
                         $id++;
-                        move_uploaded_file($upload['tmp_name'], $new_src);
+                        move_uploaded_file($tmp_name, $new_src);
                         $db->prepare("INSERT INTO {$dbprefix}content( content_id, type, user_id, published, permissions) VALUES(?,?,?,?,10)");
                         $db->sql->bind_param('iiis', $id, $type, $userid, date('Y-m-d G:i:s'));
                         $db->query();
                         $db->prepare("INSERT INTO {$dbprefix}media(id, title, url) VALUES(?, ?, ?)");
                         $db->sql->bind_param('iss', $id, $title, $relative);
                         $db->query();
+                        $this->id = $id;
+                        $this->path = $relative;
                         return $this->error($form, "Image Uploaded");
                     }else{
                         return $this->error($form, "File with same title already taken");

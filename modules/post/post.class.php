@@ -7,11 +7,9 @@ if(!defined('__nexus')){
 class post extends nexus_core{
     protected $id, $title, $desc, $body, $image, $author, $published, $permissions;
     public function __construct($isview){
-        if(!$isview){
-            try{ parent::__construct($isview); }catch(Exception $e){
-                $redirect = new reroute();
-                $redirect->route('error', 'database');
-            }
+        try{ parent::__construct($isview); }catch(Exception $e){
+            $redirect = new reroute();
+            $redirect->route('error', 'database');
         }
     }
     public function __call($id, $args){
@@ -24,11 +22,11 @@ class post extends nexus_core{
                 JOIN {$dbprefix}users ON {$dbprefix}content.user_id = {$dbprefix}users.id ";
         if(filter_var($id, FILTER_VALIDATE_INT)){
             //is id
-            $this->db->prepare($sql.= "WHERE id=?");
+            $this->db->prepare($sql.= "WHERE {$dbprefix}content.content_id=?");
             $this->db->sql->bind_param('i', $id);
         }else{
             //is title
-            $this->db->prepare($sql.= "WHERE title=?");
+            $this->db->prepare($sql.= "WHERE {$dbprefix}content.title=?");
             $this->db->sql->bind_param('s', $id);
         }
         $results = array();
@@ -46,30 +44,26 @@ class post extends nexus_core{
         }
         $this->view->load();
     }
-    public function set_values($results){
-        foreach($results as $key => $value){
-            $this->$key = $value;
+    public function get_new_form(){
+        $form = $this->get_new_form_object();
+        return $form->get_form();
+    }
+    public function get_new_form_object(){
+        include_once 'new.form.php';
+        $form =  new post_new_form();
+        return $form;
+    }
+    public function process($method, $values){
+        include_once "$method.form.php";
+        $class = "page_{$method}_form";
+        $form = new $class();
+        $return = $form->process($values, $this->db);
+        if(!empty($return)){
+            $this->view->form = "<p>$return</p>";
+            $this->view->form .= $form->get_form();
+        }else{
+            $this->view->form = $form->on_success();
         }
-    }
-    public function get_id(){
-        return $this->id;
-    }
-    public function get_title(){
-        return $this->title;
-    }
-    public function get_body(){
-        return $this->body;
-    }
-    public function get_desc(){
-        return $this->desc;
-    }
-    public function get_image($max_width = 300, $max_height = 300){
-        return $this->image;
-    }
-    public function get_published($format){
-        return date($format, strtotime($this->published));
-    }
-    public function get_permissions(){
-        return $this->permissions;
+        $this->view->load();
     }
 }

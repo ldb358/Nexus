@@ -18,7 +18,10 @@ class view{
         $this->lpath = $this->get_lpath();
     }
     public function get_lpath(){
-        return 'http://'.$_SERVER['SERVER_NAME'].(strpos($_SERVER['REQUEST_URI'],'.php')===false? substr($_SERVER['REQUEST_URI'],0,strlen($_SERVER['REQUEST_URI'])-1) : substr($_SERVER['REQUEST_URI'],0,strrpos($_SERVER['REQUEST_URI'],'/',strpos($_SERVER['REQUEST_URI'],'.php')-strlen($_SERVER['REQUEST_URI'])))).$this->dir;
+        return $this->get_url().$this->dir;
+    }
+    public function get_url(){
+        return 'http://'.$_SERVER['SERVER_NAME'].(strpos($_SERVER['REQUEST_URI'],'.php')===false? substr($_SERVER['REQUEST_URI'],0,strlen($_SERVER['REQUEST_URI'])-1) : substr($_SERVER['REQUEST_URI'],0,strrpos($_SERVER['REQUEST_URI'],'/',strpos($_SERVER['REQUEST_URI'],'.php')-strlen($_SERVER['REQUEST_URI']))));
     }
     public function __set($name, $value){
         $this->$name = $value;

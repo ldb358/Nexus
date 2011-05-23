@@ -1,0 +1,15 @@
+ #body .slider .buttonsbar,#body .slider .bl,#body .slider .br,#body .slider .tl,#body .slider .tr{
+   clear:none;
+   margin-left:-100%;
+ }
+ #blackdiv{
+   margin-left:-986px;
+ }
+#header #links li{
+   width:60px;
+   display:block;
+   margin-top:21px !important;
+}
+#header #links .current{
+   width:60px;
+}

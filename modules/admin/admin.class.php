@@ -16,6 +16,7 @@ class admin extends nexus_core{
         }
     }
     public function __call($id, $args){
+        $this->method = $id;
         if($id == 'default'){
             $this->load_all_widgets();
         }

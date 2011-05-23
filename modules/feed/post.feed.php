@@ -34,8 +34,9 @@ class post_feed extends feed{
             $results['permissions'], $results['username']
         );
         $this->db->sql->execute();
+        @include_once '/modules/post/post_item.class.php';
         while($this->db->sql->fetch()){
-            $post = new post(true);
+            $post = new post_item(true);
             $post->set_values($results);
             $this->feed[] = $post;
         }

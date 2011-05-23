@@ -29,7 +29,10 @@ class user_login_form extends form{
         );
         parent::__construct($action, $method, $fields);
     }
-    
+    public function on_success(){
+        $redirect = new reroute();
+        $redirect->route('admin','default');
+    }
     public function process($form, db $db){
         if(!empty($form['username']) && !empty($form['password'])){
             $db->prepare('SELECT id, username, password, email FROM '.DBPREFIX.'users WHERE username=?');

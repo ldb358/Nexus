@@ -54,6 +54,9 @@ class form {
             }else{
                 @$fields = sprintf('<p class="input textarea"><label for="%2$s">%3$s</label><textarea name="%2$s">%1$s</textarea></p>', $input['default'], $input['name'], $input['label']);
             }
+            if($input['type'] == 'file'){
+                $output = str_replace('<form ', '<form enctype="multipart/form-data" ',$output);
+            }
             $output .= $fields;
         }
         $output .= "</form>";
@@ -63,7 +66,7 @@ class form {
         $array = $this->fields;
         array_pop($array);
         foreach($array as $key => $value){
-            $this->fields[$key]['default'] = $form[$this->fields[$key]['name']];
+            @$this->fields[$key]['default'] = $form[$this->fields[$key]['name']];
         }
         return ucwords($message);
     }
