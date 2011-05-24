@@ -12,7 +12,8 @@ class feed extends nexus_core{
         'fields' => array(),
         'types' => array(),
         'joins' => array(),
-        'orderby' => array()
+        'orderby' => '',
+        'limit' => -1
     );
     public function __construct(){
         try{ parent::__construct(); }catch(Exception $e){
@@ -135,6 +136,10 @@ class feed extends nexus_core{
         if(isset($this->query['orderby'])){
             $sql .= " {$this->query['orderby']}";
         }
+        /* add limit */
+        if($this->query['limit'] != -1 && filter_var($this->query['limit'],FILTER_VALIDATE_INT)){
+            $sql .= " LIMIT {$this->query['limit']}";
+        }
         return $sql;
     }
     public function order_by(){
@@ -153,6 +158,12 @@ class feed extends nexus_core{
         }else{
             return $this;
         }
+    }
+    public function limit($int){
+        if(filter_var($int, FILTER_VALIDATE_INT)){
+            $this->query['limit'] = $int;
+        }
+        return $this;
     }
 }
 ?>

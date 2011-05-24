@@ -11,6 +11,7 @@ class page_item extends nexus_core{
             $redirect = new reroute();
             $redirect->route('error', 'database');
         }
+        
     }
     public function set_values($results){
         foreach($results as $key => $value){

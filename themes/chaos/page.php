@@ -1,36 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Chaos</title>
-	<link href='style.css' type='text/css' rel='stylesheet' />
-	<script src='js/jquery.js' type='text/javascript'></script>
-	<script src='js/jquery.supersleight-min.js' type='text/javascript'></script>
-	<script src='js/jquery.pngFix.js' type='text/javascript'></script>
-	<!--[if !(ie 6)]>
-	<script src='js/bgload.js' type='text/javascript'></script>
-	<![endif]-->
-	<!--[if ie 7]>
-	<link href='ie7.css' type='text/css' rel='stylesheet' />
-	<![endif]-->
-    <script src='js/page.js' type='text/javascript'></script>
-    
-	
-</head>
-<body>
-	<div id="header">
-		 	<div class='center'>
-				<h1>Chao&Sigma;</h1><h2>The Ultimate Theme</h2>
-				<div id="linksdiv">
-					<ul id="links">
-						<li ><a href='index.php'>Home</a></li>
-						<li><a href='#'>Blog</a></li>
-						<li><span class='current'></span><a href='about.php'>About</a></li>
-						<li><a href='#'>Portfolio</a></li>
-						<li><a href='#'>Contact</a></li>
-					</ul>
-				</div>
-			</div>
-	</div>
+<?php if($this->control->get_title() == 'home'){ $this->get('index'); exit(); }
+<?php $this->get('header'); ?>
     <div id='main'>
 		<div id="body">
             

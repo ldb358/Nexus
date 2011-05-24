@@ -47,21 +47,31 @@ $this->get('header');
 				</div><br />
 				<div id='blogindex'>
 					<div class='blogdiv'>New From the Blog:</div>
-					<div class='blogcolindex'>
-					<h4>Why this theme is simply the best!</h4>
-					ac odio ut erat laoreet sollicitudin ut vitae est. Sed non nibh eget purus porta ultrices ut at nisi.
-					Vestibulum dictum eros nec neque tristique et tristique nulla dictum. Aenean ornare ligula ac tellus sodales convallis. Donec
-					mauris dolor, malesuada nec sodales et, rutrum in mi...</div>
-					<div class='blogcolindex'><h4>This is the Stright off the blog</h4>Nullam massa augue, sagittis non hendrerit nec, facilisis id massa.
-					Donec eget dolor dolor. Donec placerat ullamcorper elit nec lacinia. In semper diam quis enim pretium fermentum. Nunc laoreet, velit
-					sed adipiscing convallis, dui eros tincidunt felis, at porta sapien sapien posuere nunc. </div>
+					
+					<?php
+					$user = new user(true);
+					$user_level = $user->get_user_info('level');
+					if(!filter_var($user_level, FILTER_VALIDATE_INT)){
+						$user_level = 10;
+					}
+					$feed = $this->module('feed')->level($user_level)->get_feed('post')->limit(2)->execute();
+					foreach($feed->get_feed_objects() as $post):
+						?>
+						<div class='blogcolindex'>
+							<h4><?php echo $post->get_title(); ?></h4>
+							<?php echo $post->get_desc(); ?>
+							</div><?php
+					endforeach;
+					?>
 				</div>
+				<!--
 				<div id='twitterfeed'>
 					<div class="twitterheader">Our Twitter Feed:</div>
 					<span class='tweet'>Hello <b>at 4:50pm </b></span>
 					<span class='tweet'>This is a test <b>at 4:50pm </b></span>
 					<span class='tweet'>this is a live twitter feed that will use ajax to update so that you can see what i tweet <b>at 11:09am</b></span>
 				</div>
+				-->
 			</div>
 		</div>
 	</div>

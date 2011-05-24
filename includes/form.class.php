@@ -20,6 +20,7 @@ class form {
     }
     public function get_form(){
         $index = count($this->fields);
+        while(isset($this->fields[$index])) $index++;
         $this->fields[$index] =  array(
             'name' => 'action',
             'label' => '',

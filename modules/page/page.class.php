@@ -34,8 +34,9 @@ class page extends nexus_core{
             }
             include_once 'page_item.class.php';
             $page = new page_item();
+            $this->view->control = $page;
             $page->set_values($results);
-            $page->view->load();
+            $this->view->load();
         }
     }
     public function actionDefault(){

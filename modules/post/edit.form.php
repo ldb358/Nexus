@@ -5,9 +5,9 @@ if(!defined('__nexus')){
     $redirect->route('error', '404');
 }
 include_once '/includes/form.class.php';
-class page_edit_form extends form{
+class post_edit_form extends form{
     public function __construct(){
-        $action = 'page';
+        $action = 'post';
         $method = 'new';
         $fields = array(
             array(
@@ -32,9 +32,10 @@ class page_edit_form extends form{
     public function process($form, db $db){
         $dbprefix = DBPREFIX;
         @$title = $form['title'];
-        @$contents = $form['contents'];
+        @$body = $form['body'];
+        @$desc = $form['desc'];
         @$id = $form['id'];
-        if(!empty($title) && !empty($contents) && (!empty($id) && $id !== 0)){
+        if(!empty($title) && !empty($body) && (!empty($id) && $id !== 0)){
             //query and get the new content_id
             $db->prepare("SELECT content_id FROM {$dbprefix}content WHERE {$dbprefix}content.content_id=?");
             $db->sql->bind_param('i', $id);
@@ -42,15 +43,15 @@ class page_edit_form extends form{
             $db->query();
             if(!empty($id)){
                 //update feed
-                $db->prepare("UPDATE {$dbprefix}page SET {$dbprefix}page.title=?, {$dbprefix}page.contents=? WHERE {$dbprefix}page.id=?");
-                $db->sql->bind_param('ssi', $title, $contents, $id);
+                $db->prepare("UPDATE {$dbprefix}post SET {$dbprefix}post.title=?, {$dbprefix}post.body=?,{$dbprefix}post.desc=?  WHERE {$dbprefix}post.content_id=?");
+                $db->sql->bind_param('sssi', $title, $body, $desc, $id);
                 $db->query();
-                return $this->error(array('title'=>'', 'contents'=> ''), "Page Updated");
+                return $this->error($form, "Post Updated");
             }else{
-                return $this->error(array('title' => $title, 'contents' => $contents), 'Invalid Form');
+                return $this->error($form, 'Invalid Form');
             }
         }else{
-            return $this->error(array('title'=> $title, 'contents'=> $contents), "All Fields Are Required");
+            return $this->error($form, "All Fields Are Required");
         }
     }
 }

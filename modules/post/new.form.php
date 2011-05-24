@@ -7,7 +7,7 @@ if(!defined('__nexus')){
 include_once '/includes/form.class.php';
 class post_new_form extends form{
     public function __construct(){
-        $action = 'page';
+        $action = 'post';
         $method = 'new';
         $fields = array(
             array(

@@ -75,27 +75,20 @@ class nexus_core{
         */
         $controller = get_class($this);
         if(empty($this->default_view)){
-            ob_start();
-            @include $this->get_current_view_dir()."$controller.{$this->method}.php";
-            $ob = ob_get_contents();
-            if(empty($ob)){
-                @include $this->get_current_view_dir()."$controller.php";
-                $ob = ob_get_contents();
-                if(empty($ob)){
-                    @include $this->get_current_view_dir()."{$this->method}.php";
-                    $ob = ob_get_contents();
-                    if(empty($ob)){
-                        $this->default_view = 'index.php';
-                    }else{
-                        $this->default_view = "{$this->method}.php";
-                    }
-                }else{
-                    $this->default_view = "$controller.php";
-                }
-            }else{
-                $this->default_view = "$controller.{$this->method}.php";
+            //ob_start();
+            $file = realpath(substr($this->get_current_view_dir(),1)."$controller.{$this->method}.php");
+            if(file_exists($file)){
+                return ($this->default_view = "$controller.{$this->method}.php");
             }
-            ob_end_clean();
+            $file = realpath(substr($this->get_current_view_dir(),1)."$controller.php");
+            if(file_exists($file)){
+                return ($this->default_view = "$controller.php");
+            }
+            $file = realpath(substr($this->get_current_view_dir(),1)."{$this->method}.php");
+            if(file_exists($file)){
+                return ($this->default_view = "{$this->method}.php");
+            }
+            return ($this->default_view = 'index.php');
         }
         return $this->default_view;
     }
