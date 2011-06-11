@@ -1,8 +1,23 @@
-<?php if($this->control->get_title() == 'home'){ $this->get('index'); exit(); }
+<?php if($this->control->get_title() == 'home'){ $this->get('index'); exit(); } ?>
 <?php $this->get('header'); ?>
     <div id='main'>
 		<div id="body">
-            
+            <?php echo $this->control->get_contents(); ?>
+			<?php
+			$user = new user(true);
+			$user_level = $user->get_user_info('level');
+			if(!filter_var($user_level, FILTER_VALIDATE_INT)){
+				$user_level = 10;
+			}
+			$feed = $this->module('feed')->level($user_level)->get_feed('media')->type('image')->limit(3)->execute();
+			foreach($feed->get_feed_objects() as $image):
+				?>
+				<div class='blogcolindex'>
+					<h4><?php echo $image->get_title(); ?></h4>
+					<?php echo $image->get_embed('300'); ?>
+					</div><?php
+			endforeach;
+			?>
         </div>
     </div>
     <div id="footer">

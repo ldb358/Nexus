@@ -67,7 +67,7 @@ class media_item extends nexus_core{
             $height = $width*(390/640);
             return "<iframe title='YouTube video player' width='$width' height='$height' src='http://www.youtube.com/embed/$code' frameborder='0' allowfullscreen></iframe>";
         }else{
-            return "<img src='{$this->mpath}{$this->url}' alt='{$this->title}' />";
+            return "<img width='$width' src='{$this->mpath}{$this->url}' alt='{$this->title}' />";
         }
     }
     public function get_published($format){

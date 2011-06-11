@@ -15,4 +15,14 @@ ini_set('error_log','debug.log');
 define('ENVIROMENT', 0);
 /* this is the database prefix the default is nx */
 define('DBPREFIX', 'nx_');
+/* add the nexus root to the include path */
+$start = strpos($_SERVER['REQUEST_URI'], 'index.php');
+if($start !== false){
+    $root = substr($_SERVER['REQUEST_URI'],0,$start);
+}else{
+    $root = $_SERVER['REQUEST_URI'];
+}
+$path = $_SERVER['DOCUMENT_ROOT'].$root;
+ini_set('include_path', get_include_path() . PATH_SEPARATOR . $path);
+unset($start, $root, $path);
 ?>

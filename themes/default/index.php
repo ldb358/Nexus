@@ -25,7 +25,7 @@ if(!defined('__nexus')){
             ->type('image')->execute();
         foreach($feed->get_feed_objects() as $post):
             ?><h4><?php echo $post->get_title(); ?></h4>
-            <?php echo $post->get_embed('500');
+            <?php echo $post->get_embed();
         endforeach;
         ?>
         <img src='<?php echo $this->lpath; ?>images/businesscards.jpg' alt='The Developer' />
