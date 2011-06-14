@@ -16,7 +16,7 @@ class page_feed extends feed{
     }
     public function execute(){
         //build query
-        include_once '/modules/page/page_item.class.php';
+        include_once 'modules/page/page_item.class.php';
         $dbprefix = DBPREFIX;
         $sql = "SELECT {$dbprefix}page.id, {$dbprefix}page.title, {$dbprefix}page.contents,
                 {$dbprefix}content.published, {$dbprefix}content.permissions,

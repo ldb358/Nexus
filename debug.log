@@ -1,7 +1,1 @@
-[11-Jun-2011 03:44:32] PHP Warning:  mysqli::mysqli() [<a href='mysqli.mysqli'>mysqli.mysqli</a>]: [2002] A connection attempt failed because the connected party did not  (trying to connect via tcp://localhost:3306) in C:\wamp\www\Nexus\includes\db.mysql.php on line 14
-[11-Jun-2011 03:44:32] PHP Warning:  mysqli::mysqli() [<a href='mysqli.mysqli'>mysqli.mysqli</a>]: (HY000/2002): A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
- in C:\wamp\www\Nexus\includes\db.mysql.php on line 14
-[11-Jun-2011 03:44:32] PHP Fatal error:  Maximum execution time of 60 seconds exceeded in C:\wamp\www\Nexus\includes\db.mysql.php on line 14
-[11-Jun-2011 03:44:32] PHP Warning:  include(install.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in C:\wamp\www\Nexus\modules\install\install.class.php on line 21
-[11-Jun-2011 03:44:32] PHP Warning:  include() [<a href='function.include'>function.include</a>]: Failed opening 'install.php' for inclusion (include_path='.;C:\php5\pear;/usr/lib/pear') in C:\wamp\www\Nexus\modules\install\install.class.php on line 21
-[11-Jun-2011 03:48:16] PHP Warning:  strpos() expects at least 2 parameters, 1 given in C:\wamp\www\Nexus\config\general.php on line 20
+[14-Jun-2011 22:02:14] PHP Fatal error:  Call to undefined function file_exists_for_include() in C:\wamp\www\Nexus\includes\core.class.php on line 81

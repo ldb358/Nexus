@@ -8,12 +8,12 @@ if(!defined('__nexus')){
 <!DOCTYPE html>
 <html>
 <head>
-	<title><?php echo "{$this->site_name} - {$this->control->get_title()}"; ?></title>
+	<title><?php echo "{$this->site_name} -";  if(method_exists($this->control, 'get_title')) echo $this->control->get_title(); ?></title>
 	<link href='<?php echo $this->lpath; ?>style.css' type='text/css' rel='stylesheet' />
 	<script src='<?php echo $this->lpath; ?>js/jquery.js' type='text/javascript'></script>
 	<script src='<?php echo $this->lpath; ?>js/jquery.supersleight-min.js' type='text/javascript'></script>
 	<script src='<?php echo $this->lpath; ?>js/jquery.pngFix.js' type='text/javascript'></script>
-	<script type='text/javascript'> var base = '<?php echo $this->lpath; ?>'; </script>
+	<script type='text/javascript'> var base = '<?php  echo $this->lpath; ?>'; </script>
 	<!--[if !(ie 6)]>
 	<script src='<?php echo $this->lpath; ?>js/bgload.js' type='text/javascript'></script>
 	<![endif]-->
@@ -25,12 +25,12 @@ if(!defined('__nexus')){
 <body>
 	<div id="header">
 		 	<div class='center'>
-				<h1><?php echo $this->site_name; ?></h1><h2> <?php echo $this->control->get_site_option('slogan'); ?></h2>
+				<h1><?php echo $this->site_name; ?></h1><h2> <?php echo $this->module('page')->get_site_option('slogan'); ?></h2>
 				<div id="linksdiv">
 					<ul id="links">
 						<?php
                         //get the current user info
-                            @include_once '/modules/user/user.class.php';
+                            @include_once 'modules/user/user.class.php';
                             $user = new user(true);
                             $user_level = $user->get_user_info('level');
                             if(!filter_var($user_level, FILTER_VALIDATE_INT)){
@@ -48,6 +48,7 @@ if(!defined('__nexus')){
 								</li>
                             <?php
 							endforeach;
+							
                         ?>
 					</ul>
 				</div>

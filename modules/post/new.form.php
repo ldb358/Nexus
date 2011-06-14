@@ -4,7 +4,7 @@ if(!defined('__nexus')){
     $redirect = new reroute();
     $redirect->route('error', '404');
 }
-include_once '/includes/form.class.php';
+include_once 'includes/form.class.php';
 class post_new_form extends form{
     public function __construct(){
         $action = 'post';
@@ -48,7 +48,7 @@ class post_new_form extends form{
         @$image = $form['image'];
         if(!empty($title) && !empty($body)){
             //upload the image
-            include_once '/modules/media/upload.form.php';
+            include_once 'modules/media/upload.form.php';
             $image = new media_upload_form();
             $uploaded = $image->process($form, $db);
             if($uploaded != 'Image Uploaded'){
@@ -56,7 +56,7 @@ class post_new_form extends form{
             }
             $image_src = $image->path;
             //query and get the new content_id
-            include_once '/modules/user/user.class.php';
+            include_once 'modules/user/user.class.php';
             $user = new user();
             $userid = $user->get_user_info('id');
             //query and get type_id

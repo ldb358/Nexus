@@ -10,7 +10,6 @@ class media extends nexus_core{
         try{ parent::__construct($isview); }catch(Exception $e){
             $redirect = new reroute();
             $redirect->route('error', 'database');
-            exit();
         }
     }
     public function actionDefault(){

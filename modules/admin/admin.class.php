@@ -11,8 +11,8 @@ class admin extends nexus_core{
             $redirect->route('error', 'database');
         }
         if(!$isview){
-            $this->current_view_dir = '/themes/admin/';
-            $this->view->set_dir('/themes/admin/');
+            $this->current_view_dir = 'themes/admin/';
+            $this->view->set_dir('themes/admin/');
         }
     }
     public function __call($id, $args){

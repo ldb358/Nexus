@@ -6,7 +6,7 @@ if(!defined('__nexus')){
 }
 class error extends nexus_core{
     private $display_errors = false;
-    public function __construct($isview){
+    public function __construct($isview = false){
         $display_errors = DISPLAY_ERRORS;
         $this->display_errors = $display_errors;
         try{ parent::__construct($isview); }catch(Exception $e){}

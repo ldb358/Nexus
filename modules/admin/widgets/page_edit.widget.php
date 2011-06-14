@@ -24,14 +24,14 @@ class page_edit extends widget{
          with all of the editable fields
         */
         //get the current user info
-        @include_once '/modules/user/user.class.php';
+        @include_once 'modules/user/user.class.php';
         $user = new user(true);
         $user_level = $user->get_user_info('level');
         if(!filter_var($user_level, FILTER_VALIDATE_INT)){
             $user_level = 10;
         }
         //get the feed
-        @include_once '/modules/feed/feed.class.php';
+        @include_once 'modules/feed/feed.class.php';
         if(!class_exists('feed')){
             return 'An error has occured';
         }
@@ -39,7 +39,7 @@ class page_edit extends widget{
         $dbprefix = DBPREFIX;
         $pages = $feed->get_feed('page')->level($user_level)->order_by("{$dbprefix}content.published")->execute();
         //get form
-        @include_once '/modules/page/page.class.php';
+        @include_once 'modules/page/page.class.php';
         if(!class_exists('page')){
             return 'An error has occured';
         }

@@ -25,7 +25,7 @@ class reroute{
          *
         */
         if(!class_exists($module)){
-            @include_once "/modules/$module/$module.class.php";
+            @include_once "modules/$module/$module.class.php";
             if(!class_exists($module)){
                 $this->route($module, $method);
             }

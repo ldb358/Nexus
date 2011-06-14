@@ -38,7 +38,7 @@ function db_factory($enviroment = ENVIROMENT){
     }else{
         try{
             $class = "db_{$args['type']}";
-            include_once "/includes/db.{$args['type']}.php";
+            include_once "includes/db.{$args['type']}.php";
             if(class_exists($class)){
                 $db = new $class($args);
                 if($db) throw new Exception('created');

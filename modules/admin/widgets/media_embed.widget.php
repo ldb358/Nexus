@@ -18,7 +18,7 @@ class media_embed extends widget{
         $this->header = 'Embed Video(From Youtube):';
     }
     public function set_body(){
-        include_once '/modules/media/media.class.php';
+        include_once 'modules/media/media.class.php';
         if(class_exists('media')){
             $page = new media(true);
             $form = $page->get_embed_form_object();

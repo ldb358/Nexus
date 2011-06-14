@@ -4,7 +4,7 @@ if(!defined('__nexus')){
     $redirect = new reroute();
     $redirect->route('error', '404');
 }
-include_once '/includes/form.class.php';
+include_once 'includes/form.class.php';
 class media_upload_form extends form{
     public $id, $path;
     public function __construct(){
@@ -58,7 +58,7 @@ class media_upload_form extends form{
                     $title = htmlentities($form['title']);
                     $new_src .= $form['title'].$ext;
                     $relative .= $form['title'].$ext;
-                    include_once '/modules/user/user.class.php';
+                    include_once 'modules/user/user.class.php';
                     $user = new user();
                     $userid = $user->get_user_info('id');
                     if(!file_exists($new_src)){

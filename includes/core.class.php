@@ -9,7 +9,7 @@ class nexus_core{
     
     public function __construct($isview = false){
         include_once 'view.class.php';
-        include_once '/config/db_settings.php';
+        include_once 'config/db_settings.php';
         $this->db = db_factory();
         if(!$this->db instanceof db){
             throw new Exception('No Database');
@@ -37,8 +37,10 @@ class nexus_core{
         $this->method = $name;
         if(method_exists($this, 'action'.ucfirst($name))){
             call_user_func(array($this,'action'.ucfirst($name)),$args);
-        }else{
+        }else if(strpos($name, 'get_') === false){
             $this->actionDefault($args);
+        }else{
+            return;
         }
     }
     public function sec_call($call, $args){
@@ -57,12 +59,12 @@ class nexus_core{
             if($this->db instanceof db){
                 $result = $this->get_site_option('theme');
                 if(!is_null($result)){
-                    $this->current_view_dir = "/themes/$result/";
+                    $this->current_view_dir = "themes/$result/";
                 }else{
-                    $this->current_view_dir = '/themes/default/';
+                    $this->current_view_dir = 'themes/default/';
                 }
             }else{
-                $this->current_view_dir = '/themes/default/';
+                $this->current_view_dir = 'themes/default/';
                 
             }
         }
@@ -73,19 +75,19 @@ class nexus_core{
         ** order is controller.method -> method -> controller ->
         ** @return string the current view to be used if none is specified
         */
+        include_once 'includes/file_exists_for_include.function.php';
         $controller = get_class($this);
         if(empty($this->default_view)){
-            //ob_start();
-            $file = realpath(substr($this->get_current_view_dir(),1)."$controller.{$this->method}.php");
-            if(file_exists($file)){
+            $file = $this->get_current_view_dir()."$controller.{$this->method}.php";
+            if(file_exists_for_include($file)){
                 return ($this->default_view = "$controller.{$this->method}.php");
             }
-            $file = realpath(substr($this->get_current_view_dir(),1)."$controller.php");
-            if(file_exists($file)){
+            $file = $this->get_current_view_dir()."$controller.php";
+            if(file_exists_for_include($file)){
                 return ($this->default_view = "$controller.php");
             }
-            $file = realpath(substr($this->get_current_view_dir(),1)."{$this->method}.php");
-            if(file_exists($file)){
+            $file = $this->get_current_view_dir()."{$this->method}.php";
+            if(file_exists_for_include($file)){
                 return ($this->default_view = "{$this->method}.php");
             }
             return ($this->default_view = 'index.php');

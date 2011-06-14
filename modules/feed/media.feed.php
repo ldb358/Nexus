@@ -16,7 +16,7 @@ class media_feed extends feed{
     }
     public function execute(){
         //build query
-        include_once '/modules/media/media_item.class.php';
+        include_once 'modules/media/media_item.class.php';
         $dbprefix = DBPREFIX;
         $sql = "SELECT {$dbprefix}media.id, {$dbprefix}media.title, {$dbprefix}media.url,
                 {$dbprefix}content.published, {$dbprefix}content.permissions,

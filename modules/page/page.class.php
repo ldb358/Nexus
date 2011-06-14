@@ -32,7 +32,7 @@ class page extends nexus_core{
                 $redirect = new reroute();
                 $redirect->route();
             }
-            include_once 'page_item.class.php';
+            include_once 'modules/page/page_item.class.php';
             $page = new page_item();
             $this->view->control = $page;
             $page->set_values($results);

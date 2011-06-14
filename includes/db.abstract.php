@@ -14,7 +14,7 @@ abstract class db{
     abstract protected function connect();
     abstract public function close();
     abstract public function prepare($sql);
-    abstract public function query($sql);
+    abstract public function query($sql = null);
     abstract public function get_error_message();
 }
 ?>

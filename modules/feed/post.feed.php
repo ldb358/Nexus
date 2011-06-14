@@ -16,7 +16,7 @@ class post_feed extends feed{
     }
     public function execute(){
         //build query
-        include_once '/modules/post/post.class.php';
+        include_once 'modules/post/post.class.php';
         $dbprefix = DBPREFIX;
         $sql = "SELECT {$dbprefix}post.content_id, {$dbprefix}post.title, {$dbprefix}post.desc, {$dbprefix}post.body, {$dbprefix}post.image,
                 {$dbprefix}content.published, {$dbprefix}content.permissions,
@@ -34,7 +34,7 @@ class post_feed extends feed{
             $results['permissions'], $results['username']
         );
         $this->db->sql->execute();
-        @include_once '/modules/post/post_item.class.php';
+        @include_once 'modules/post/post_item.class.php';
         while($this->db->sql->fetch()){
             $post = new post_item(true);
             $post->set_values($results);

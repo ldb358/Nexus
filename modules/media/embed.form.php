@@ -4,7 +4,7 @@ if(!defined('__nexus')){
     $redirect = new reroute();
     $redirect->route('error', '404');
 }
-include_once '/includes/form.class.php';
+include_once 'includes/form.class.php';
 class media_embed_form extends form{
     public function __construct(){
         $action = 'media';
@@ -35,7 +35,7 @@ class media_embed_form extends form{
         $url = $form['url'];
         //check if it is a valid youtube url
         if(preg_match('/youtube\.com.*?v=(.+?)(&|$|\/)/', $form['url'])){
-            include_once '/modules/user/user.class.php';
+            include_once 'modules/user/user.class.php';
             $user = new user();
             $userid = $user->get_user_info('id');
             //query and get type_id

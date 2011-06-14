@@ -18,7 +18,7 @@ class post_new extends widget{
         $this->header = 'New Post';
     }
     public function set_body(){
-        include_once '/modules/post/post.class.php';
+        include_once 'modules/post/post.class.php';
         if(class_exists('post')){
             $page = new post(true);
             $form = $page->get_new_form_object();

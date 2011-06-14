@@ -18,7 +18,7 @@ class media_upload extends widget{
         $this->header = 'Upload Image';
     }
     public function set_body(){
-        include_once '/modules/media/media.class.php';
+        include_once 'modules/media/media.class.php';
         if(class_exists('media')){
             $page = new media(true);
             $form = $page->get_upload_form_object();

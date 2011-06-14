@@ -5,7 +5,7 @@ if(!defined('__nexus')){
     $redirect->route('error', '404');
 }
 /* This is the mysql implmentation of the db abstract */
-include_once '/includes/db.abstract.php';
+@include_once 'includes/db.abstract.php';
 if(class_exists('db')){
     class db_mysql extends db{
         public $info;

@@ -4,7 +4,7 @@ if(!defined('__nexus')){
     $redirect = new reroute();
     $redirect->route('error', '404');
 }
-include_once '/includes/form.class.php';
+include_once 'includes/form.class.php';
 class page_new_form extends form{
     public function __construct(){
         $action = 'page';
@@ -35,7 +35,7 @@ class page_new_form extends form{
         @$contents = $form['contents'];
         if(!empty($title) && !empty($contents)){
             //query and get the new content_id
-            include_once '/modules/user/user.class.php';
+            include_once 'modules/user/user.class.php';
             $user = new user();
             $userid = $user->get_user_info('id');
             //query and get type_id

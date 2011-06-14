@@ -85,7 +85,7 @@ class user extends nexus_core{
         $this->db->sql->bind_param('s', $_SESSION['username']);
         $this->db->sql->bind_result($id, $username, $password, $email, $first, $last, $level);
         $this->db->query();
-        if(@$_SESSION['username']== $username && @$_SESSION['password'] == $password){
+        if(@$_SESSION['username']== $username && @$_SESSION['password'] == $password && !empty($username)){
             $this->user['id'] = $id;
             $this->user['username'] = $username;
             $this->user['password'] = $password;

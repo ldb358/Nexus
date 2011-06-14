@@ -21,7 +21,14 @@ class view{
         return $this->get_url().$this->dir;
     }
     public function get_url(){
-        return 'http://'.$_SERVER['SERVER_NAME'].(strpos($_SERVER['REQUEST_URI'],'.php')===false? substr($_SERVER['REQUEST_URI'],0,strlen($_SERVER['REQUEST_URI'])-1) : substr($_SERVER['REQUEST_URI'],0,strrpos($_SERVER['REQUEST_URI'],'/',strpos($_SERVER['REQUEST_URI'],'.php')-strlen($_SERVER['REQUEST_URI']))));
+        $base = 'http://'.$_SERVER['SERVER_NAME'];
+        $start = strpos($_SERVER['REQUEST_URI'],'index.php');
+        if($start !== false){
+            $end = substr($_SERVER['REQUEST_URI'], 0, $start);
+        }else{
+            $end = $_SERVER['REQUEST_URI'];
+        }
+        return $base.$end;
     }
     public function __set($name, $value){
         $this->$name = $value;
@@ -42,7 +49,7 @@ class view{
         }else{
             try{
                 if(!class_exists($name)){
-                    include_once "/modules/$name/$name.class.php";
+                    include_once "modules/$name/$name.class.php";
                     if(!class_exists($name)){
                         throw new Exception('The class could not be loaded');
                     }else{

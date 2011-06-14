@@ -29,7 +29,7 @@ class widget{
         return;
     }
     public function process($module, $method, $values){
-        include_once "/modules/$module/$method.form.php";
+        include_once "modules/$module/$method.form.php";
         $class = "{$module}_{$method}_form";
         if(class_exists($class)){
             $form = new $class();

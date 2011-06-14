@@ -24,29 +24,16 @@ if(isset($_POST['action'])){
     }
 }else if(!empty($_GET['action'])){
     /* else load the appopreate module via get*/
-    if($_GET['action'] == 'error'){
-        if(file_exists('modules/error/error.class.php')){
-            include_once 'modules/error/error.class.php';
-            $method = !empty($_GET['method'])? $_GET['method'] : 'default';
-            $page = new error(DISPLAY_ERRORS);
-            $page->$method();
-            exit();
-        }else{
-            $redirect = new reroute();
-            $redirect->route();
-        }
+    if(file_exists("modules/{$_GET['action']}/{$_GET['action']}.class.php")){
+        include_once "modules/{$_GET['action']}/{$_GET['action']}.class.php";
+        $method = !empty($_GET['method'])? $_GET['method'] : 'default';
+        $page = new $_GET['action']();
+        @$extra = $_GET['extra'];
+        $extra = explode('/', $extra);
+        $page->$method($extra);
     }else{
-        if(file_exists("modules/{$_GET['action']}/{$_GET['action']}.class.php")){
-            include_once "modules/{$_GET['action']}/{$_GET['action']}.class.php";
-            $method = !empty($_GET['method'])? $_GET['method'] : 'default';
-            $page = new $_GET['action']();
-            @$extra = $_GET['extra'];
-            $extra = explode('/', $extra);
-            $page->$method($extra);
-        }else{
-            $redirect = new reroute();
-            $redirect->route();
-        }
+        $redirect = new reroute();
+        $redirect->route();
     }
 }else{
     /* else load the home page */
