@@ -4,9 +4,9 @@ if(!defined('__nexus')){
     $redirect = new reroute();
     $redirect->route('error', '404');
 }
-    /* encapsulated function that will check the settings for the module and method to be loaded
+    /*function that will check the settings for the module and method to be loaded
     * to ensure that the user is of the appropriate level to perform the action that
-    * they are trying to do it also checks that the module being loaded is active
+    * they are trying to do. it also checks that the module being loaded is active.
     */
 include_once 'modules/user/user.class.php';
 $user = new user(true);
@@ -48,4 +48,4 @@ if(isset($action)){
 }
 //clean up the global scope
 unset($user, $level, $action, $method, $settings, $page_level);
-?> 
+?>

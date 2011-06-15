@@ -5,7 +5,7 @@ if(!defined('__nexus')){
     $redirect->route('error', '404');
 }
 //should the error report be displayed or generic error page
-define('DISPLAY_ERRORS', true);
+define('DISPLAY_ERRORS', false);
 ini_set('display_errors', DISPLAY_ERRORS);
 ini_set('log_errors', 1);
 ini_set('error_log','debug.log');

@@ -24,7 +24,7 @@ class admin extends nexus_core{
             @include_once "admin.$id.php";
             $class = "admin_$id";
             if(class_exists($class)){
-                $master_widget = new $class(__dir__.'/widgets/');
+                $master_widget = new $class('modules/admin/widgets/');
                 $this->view->set_widgets($master_widget->get($args[0]));
             }
             $this->actionDefault($args);
@@ -35,13 +35,13 @@ class admin extends nexus_core{
     }
     public function load_all_widgets(){
         $all_widgets = array();
-        foreach(glob(__dir__."/admin.*.php") as $id){
+        foreach(glob("modules/admin/admin.*.php") as $id){
             include_once $id;
             $start = strrpos($id,'admin');
             $end = strpos($id,'.php', $start);
             $id = str_replace('.','_', substr($id, $start, $end-$start));
             if(class_exists($id)){
-                $master_widget = new $id(__dir__.'/widgets/');
+                $master_widget = new $id('modules/admin/widgets/');
                 if($master_widget instanceof master_widget){
                     $all_widgets = array_merge($all_widgets,$master_widget->get());
                 }
@@ -59,7 +59,7 @@ class admin extends nexus_core{
         @include_once "admin.{$args[0]}.php";
         $class = "admin_{$args[0]}";
         if(class_exists($class)){
-            $master_widget = new $class(__dir__.'/widgets/');
+            $master_widget = new $class('modules/admin/widgets/');
             $master_widget->process($args);
             $id = array($id);
             $this->view->set_widgets($master_widget->get(array_merge($id, $args[1])));

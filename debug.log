@@ -1,1 +1,0 @@
-[14-Jun-2011 22:02:14] PHP Fatal error:  Call to undefined function file_exists_for_include() in C:\wamp\www\Nexus\includes\core.class.php on line 81
