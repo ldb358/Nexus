@@ -8,8 +8,7 @@ if(!defined('__nexus')){
     * to ensure that the user is of the appropriate level to perform the action that
     * they are trying to do. it also checks that the module being loaded is active.
     */
-include_once 'modules/user/user.class.php';
-$user = new user(true);
+$user =& load_class('user');
 $level = $user->get_user_info('level');
 if($level === false){
     $level = 10;

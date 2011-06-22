@@ -3,11 +3,8 @@ session_start();
 /* prevents include files from being executed */
 define('__nexus',true);
 
-/* load the core files rquired for functionality */
+/* load the general settings file required for functionality */
 include_once 'config/general.php';
-include_once 'includes/core.class.php';
-include_once 'includes/reroute.class.php';
-include_once 'includes/master_widget.class.php';
 
 /* check to see of the user has the permissions to perform the requested action */
 include_once 'includes/permissions.function.php';

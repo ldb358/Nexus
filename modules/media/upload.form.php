@@ -58,8 +58,7 @@ class media_upload_form extends form{
                     $title = htmlentities($form['title']);
                     $new_src .= $form['title'].$ext;
                     $relative .= $form['title'].$ext;
-                    include_once 'modules/user/user.class.php';
-                    $user = new user();
+                    $user =& load_class('user');
                     $userid = $user->get_user_info('id');
                     if(!file_exists($new_src)){
                         //query and get type_id

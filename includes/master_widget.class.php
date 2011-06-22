@@ -8,7 +8,6 @@ class master_widget{
     protected $widgets = array(), $from, $db, $params, $forms = array();
     public function __construct($from){
         include_once 'config/db_settings.php';
-        include_once 'widget.class.php';
         $this->db = db_factory();
         if(!$this->db instanceof db){
             throw new Exception('No Database');

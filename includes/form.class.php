@@ -12,7 +12,7 @@ class form {
         $this->fields = $fields;
     }
     public function process($form, db $db){
-    
+        
     }
     public function on_success(){
         $redirect = new reroute();
@@ -20,6 +20,7 @@ class form {
     }
     public function get_form(){
         $index = count($this->fields);
+        // this prevents the action, method or widget fields from overwriting any fields in the case that a field was deleted
         while(isset($this->fields[$index])) $index++;
         $this->fields[$index] =  array(
             'name' => 'action',
@@ -55,7 +56,7 @@ class form {
             }else{
                 @$fields = sprintf('<p class="input textarea"><label for="%2$s">%3$s</label><textarea name="%2$s">%1$s</textarea></p>', $input['default'], $input['name'], $input['label']);
             }
-            if($input['type'] == 'file'){
+            if($input['type'] == 'file' && strpos($output, '<form enctype="multipart/form-data') === false){
                 $output = str_replace('<form ', '<form enctype="multipart/form-data" ',$output);
             }
             $output .= $fields;

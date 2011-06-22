@@ -56,8 +56,7 @@ class post_new_form extends form{
             }
             $image_src = $image->path;
             //query and get the new content_id
-            include_once 'modules/user/user.class.php';
-            $user = new user();
+            $user =& load_class('user');
             $userid = $user->get_user_info('id');
             //query and get type_id
             $db->prepare("SELECT type FROM {$dbprefix}content_type WHERE `desc`='post'");

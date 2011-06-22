@@ -6,15 +6,17 @@ if(!defined('__nexus')){
 }
 /*  This Class is the defaults view class it allow store values that should be used
  *  and to include_once the files into the view
+ *
+ *  @param array $info array(dir, file);
  */
 class view{
     protected $default, $dir, $path, $modules = array(), $widgets = array(), $control;
-    public function __construct($dir, $default){
+    public function __construct($info){
         /*  This is the file to be loaded when the load method is called with out
-        **  a parameter 
+        **  a parameter
         */
-        $this->dir = $dir;
-        $this->default = $default;
+        $this->dir = $info[0];
+        $this->default = $info[1];
         $this->lpath = $this->get_lpath();
     }
     public function get_lpath(){
@@ -49,7 +51,8 @@ class view{
         }else{
             try{
                 if(!class_exists($name)){
-                    include_once "modules/$name/$name.class.php";
+                    /* this function will load the class, we dont used the returned instance because we want a unique object just for this view */
+                    load_class($name);
                     if(!class_exists($name)){
                         throw new Exception('The class could not be loaded');
                     }else{

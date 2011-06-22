@@ -16,17 +16,17 @@ class nexus_core{
         }
         $this->isview = $isview;
         if(!$isview){            
-           $this->view = new view($this->get_current_view_dir(), $this->get_default_view());
+           $this->view = new view(array($this->get_current_view_dir(), $this->get_default_view()));
            $this->view->control = $this;
-           $this->view->reroute = new reroute();
+           $this->view->reroute = load_class('reroute');
            $this->view->site_name = $this->get_site_option('title');
         }
     }
-    public function load_module($name){
+    public function &load_module($name){
         //this will any core module with out a view
-        include_once "modules/$name/$name.class.php";
-        if(class_exists($name)){
-            return new $name(true);
+        $class =& load_class($name);
+        if($class !== false){
+            return $class;
         }
     }
     public function __call($name, $args){
@@ -43,16 +43,10 @@ class nexus_core{
             return;
         }
     }
-    public function sec_call($call, $args){
-        /* This is the function that should be used for all secure actions, such
-        ** as any action that destroys
-        */
-        $this->$call($args);
-        
-    }
     public function get_current_view_dir(){
         /* This function gets the view directory that all view files should be
         ** loaded from
+        ** 
         ** @return string the current view dir it will also set the value in the class for future access
         */
         if(empty($this->current_view_dir)){
@@ -72,10 +66,11 @@ class nexus_core{
     }
     public function get_default_view(){
         /* This function gets the view file that should be used as a default the
-        ** order is controller.method -> method -> controller ->
+        ** order is controller.method -> controller-> method -> index.php
+        **
+        ** 
         ** @return string the current view to be used if none is specified
         */
-        include_once 'includes/file_exists_for_include.function.php';
         $controller = get_class($this);
         if(empty($this->default_view)){
             $file = $this->get_current_view_dir()."$controller.{$this->method}.php";
