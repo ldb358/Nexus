@@ -36,6 +36,7 @@ class admin extends nexus_core{
     public function load_all_widgets(){
         $all_widgets = array();
         foreach(glob("modules/admin/admin.*.php") as $id){
+            if(strpos($id, 'admin.json.php') !== false){ continue; }
             include_once $id;
             $start = strrpos($id,'admin');
             $end = strpos($id,'.php', $start);

@@ -1,1 +1,0 @@
-[22-Jun-2011 05:17:25] PHP Catchable fatal error:  Argument 1 passed to widget::__construct() must be an instance of db, boolean given, called in C:\wamp\www\Nexus\config\general.php on line 78 and defined in C:\wamp\www\Nexus\includes\widget.class.php on line 9

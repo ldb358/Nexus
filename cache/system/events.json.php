@@ -1,0 +1,1 @@
+{"events":{"init":[["validate_permissions","run_route"]],"test":["tested"]},"modules":["core","error"]}
