@@ -93,7 +93,7 @@ function __autoload($classname){
 }
 /*
  * This is a simple class that creates a memory referance to an object instead of
- * a createing just an object
+ * simply creating an object
  *
  * @param object $instance pass this a new class instance and it returns a memory referance for example "new page()"
  * @return object it returns the object
