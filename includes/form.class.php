@@ -19,23 +19,20 @@ class form {
         $redirect->route();
     }
     public function get_form(){
-        $index = count($this->fields);
-        // this prevents the action, method or widget fields from overwriting any fields in the case that a field was deleted
-        while(isset($this->fields[$index])) $index++;
-        $this->fields[$index] =  array(
+        $this->fields[] =  array(
             'name' => 'action',
             'label' => '',
             'type' => 'hidden',
             'default' => $this->action
         );
-        $this->fields[++$index] =  array(
+        $this->fields[] =  array(
             'name' => 'method',
             'label' => '',
             'type' => 'hidden',
             'default' => $this->method
         );
         if(!empty($this->method)){
-            $this->fields[++$index] =  array(
+            $this->fields[] =  array(
                 'name' => 'widget',
                 'label' => '',
                 'type' => 'hidden',
