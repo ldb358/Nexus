@@ -105,7 +105,7 @@ class user extends nexus_core{
         if(!isset($this->user[$name])){
             $this->set_user();
         }
-        if(empty($this->user[$name]) && $this->user[$name] !== 0){
+        if(empty($this->user[$name]) && @$this->user[$name] !== 0){
             return false;
         }
         return $this->user[$name];
