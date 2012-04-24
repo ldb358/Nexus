@@ -31,7 +31,9 @@ class nexus_core{
     }
     public function __call($name, $args){
         if(empty($this->method) && !$this->isview){
+            $this->method = $name;
             $this->default_view = '';
+            $this->view = new view(array($this->get_current_view_dir(), $this->get_default_view()));
             $this->get_default_view();
         }
         $this->method = $name;
