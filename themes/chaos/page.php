@@ -24,9 +24,9 @@
         <div class='center'>
 			<div id='footerfollow'>Follow us:</div>
 			<ul id="followimages">
-				<li><img src='images/rss.png' alt='follow our rss feed' /></li>
-				<li><img src='images/facebook.png' alt='follow on facebook' /></li>
-				<li><img src='images/twitter.png' alt='follow on twitter' /></li>
+				<li><img src='<?php echo $this->lpath; ?>images/rss.png' alt='follow our rss feed' /></li>
+				<li><img src='<?php echo $this->lpath; ?>images/facebook.png' alt='follow on facebook' /></li>
+				<li><img src='<?php echo $this->lpath; ?>images/twitter.png' alt='follow on twitter' /></li>
 			</ul>
 			<div id='copyright'>Copyright &copy; <?php echo date('Y') ?> Lane Breneman</div>
 		</div>
