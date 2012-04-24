@@ -9,6 +9,7 @@ define('DISPLAY_ERRORS', false);
 ini_set('display_errors', DISPLAY_ERRORS);
 ini_set('log_errors', 1);
 ini_set('error_log','debug.log');
+/* prevents errors from being dsiplayed not really overly important */
 date_default_timezone_set('America/Los_Angeles');
 include_once 'includes/widget.class.php';
 
