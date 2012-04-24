@@ -27,9 +27,8 @@ class link_in{
             if(is_array($method)){
                 $key = array_keys($method);
                 foreach($key as $value){
-                    if(filter_var($value, FILTER_VALIDATE_INT) && function_exists($method[$value])){
+                    if(filter_var($value, FILTER_VALIDATE_INT) !== false && function_exists($method[$value])){
                         call_user_func($method[$value], $params);
-                        var_dump($value);
                         continue;
                     }
                     $object =& load_class($value);
